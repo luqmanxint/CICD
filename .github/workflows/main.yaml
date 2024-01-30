@@ -1,10 +1,10 @@
 name: AndroidBuild
 on:
-  pull_request:
-    branches: [ master ]
-    push:
-      branches: [ master ]
-job:
+  pull_request :
+    branches : [ master ]
+    push :
+      branches : [ master ]
+jobs:
   build:
     runs-o: window-latest
     steps:
