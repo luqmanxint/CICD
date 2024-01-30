@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "716498713249",
+    "project_id": "cicd-f1c3d",
+    "storage_bucket": "cicd-f1c3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716498713249:android:0d5485383b179417540ee0",
+        "android_client_info": {
+          "package_name": "com.myfirstcompose"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCySCCub3FdG3eyHiIuY76HxjeCoE9gjCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
