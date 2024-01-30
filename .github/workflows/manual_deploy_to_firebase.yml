@@ -32,8 +32,8 @@ jobs:
 
       - name: Debug Information
         run: |
-          echo "App ID: $FIREBASE_APP_ID"
-          echo "Service Credentials: $CREDENTIAL_FILE_CONTENT"
+          echo "App ID: ${{ secrets.FIREBASE_APP_ID }}"
+          echo "Service Credentials: ${{ secrets.CREDENTIAL_FILE_CONTENT }}"
           echo "APK File Path: $(pwd)/app/build/outputs/apk/debug/app-debug.apk"
 
       - name: Upload Artifact to Firebase App Distribution
