@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MyFirstCompose"
 include(":app")
- 
+include(":benchmark")

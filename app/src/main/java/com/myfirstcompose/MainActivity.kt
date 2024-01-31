@@ -19,12 +19,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.myfirstcompose.ui.theme.MyFirstComposeTheme
-
+import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
+        setContent { //flksflsdflk
             MyFirstComposeTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -37,7 +37,8 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-    fun <T, R> Collection<T>.fold(
+
+    private fun <T, R> Collection<T>.fold(
         initial: R,
         combine: (acc: R, nextElement: T) -> R
     ): R {
@@ -47,10 +48,19 @@ class MainActivity : ComponentActivity() {
         }
         return accumulator
     }
-    fun doIt(){
+
+    private fun doIt() {
         val items = listOf(1, 2, 3, 4, 5)
-        val concatenatedString: String = listOf("Hello", ", ","fucking", ", ","world", "!").fold("") { acc, nextElement -> acc + nextElement }
-        println("Concatenated String: $concatenatedString") // Output: Concatenated String: Hello, world!
+        val concatenatedString: String = listOf(
+            "Hello",
+            ", ",
+            "fucking",
+            ", ",
+            "world",
+            "!"
+        ).fold("") { acc, nextElement -> acc + nextElement }
+        // Output: Concatenated String: Hello, world!
+        println("Concatenated String: " + "$concatenatedString")
 
 // Lambdas are code blocks enclosed in curly braces.
         items.fold("0") {
@@ -76,7 +86,7 @@ class MainActivity : ComponentActivity() {
         val repeatFun: String.(Int) -> String = { times -> this.repeat(times) }
 
         // Create a function type with two parameters and assign it the value of repeatFun
-        val twoParameters: (String, Int) -> String = repeatFun // OK
+        // val twoParameters: (String, Int) -> String = repeatFun // OK
 
         // Define a function that takes a function as a parameter and applies it to "hello" and 3
         fun runTransformation(f: (String, Int) -> String): String {
@@ -87,10 +97,16 @@ class MainActivity : ComponentActivity() {
         val result = runTransformation(repeatFun) // OK
 
         println("result = $result")
+
+        Timber.d("Debug message");
+        Timber.e("Error message");
+        Timber.i("Info message");
+
     }
+
     override fun onResume() {
         super.onResume()
-       doIt()
+        doIt()
     }
 
     override fun onPause() {
@@ -108,10 +124,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MessageList(messages: List<MessageCard>) {
-    LazyColumn(modifier=Modifier.fillMaxHeight()) {
+    LazyColumn(modifier = Modifier.fillMaxHeight()) {
         items(messages) { message ->
             MessageCard(msg = message)
-            Divider(modifier= Modifier.height(2.dp)) // Add a divider between items if needed
+            Divider(modifier = Modifier.height(2.dp)) // Add a divider between items if needed
 
         }
     }
@@ -147,14 +163,36 @@ fun MessageCard(msg: MessageCard) {
 @Preview(showBackground = true)
 @Composable
 fun MessageListPreview() {
-
     MessageList(generateSampleMessages())
 }
+
 fun generateSampleMessages(): List<MessageCard> {
     return listOf(
+        MessageCard("John Doe", "This is the message body 1"),
+        MessageCard("Jane Doe", "This is the message body 2"),
+        MessageCard("Bob Smith", "This is the message body 3"),
+        MessageCard("John Doe", "This is the message body 1"),
+        MessageCard("Jane Doe", "This is the message body 2"),
+        MessageCard("Bob Smith", "This is the message body 3"),
+        MessageCard("John Doe", "This is the message body 1"),
+        MessageCard("Jane Doe", "This is the message body 2"),
+        MessageCard("Bob Smith", "This is the message body 3"),
+        MessageCard("John Doe", "This is the message body 1"),
+        MessageCard("Jane Doe", "This is the message body 2"),
+        MessageCard("Bob Smith", "This is the message body 3"),
+        MessageCard("John Doe", "This is the message body 1"),
+        MessageCard("Jane Doe", "This is the message body 2"),
+        MessageCard("Bob Smith", "This is the message body 3"),
+        MessageCard("John Doe", "This is the message body 1"),
+        MessageCard("Jane Doe", "This is the message body 2"),
+        MessageCard("Bob Smith", "This is the message body 3"),
+        MessageCard("John Doe", "This is the message body 1"),
+        MessageCard("Jane Doe", "This is the message body 2"),
+        MessageCard("Bob Smith", "This is the message body 3"),
         MessageCard("John Doe", "This is the message body 1"),
         MessageCard("Jane Doe", "This is the message body 2"),
         MessageCard("Bob Smith", "This is the message body 3")
     )
 }
+
 data class MessageCard(val author: String, val body: String)

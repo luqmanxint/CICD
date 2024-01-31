@@ -1,8 +1,12 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import org.jetbrains.kotlin.js.backend.ast.JsEmpty.setSource
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
-
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    id("io.gitlab.arturbosch.detekt") version "1.22.0"
 }
 
 android {
@@ -24,6 +28,9 @@ android {
     }
 
     buildTypes {
+        debug {
+
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -31,16 +38,25 @@ android {
                 "proguard-rules.pro"
             )
         }
+        create("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
     buildFeatures {
         compose = true
+        buildConfig= true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -51,6 +67,63 @@ android {
         }
     }
 }
+//tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+//ktlint {
+//    enableExperimentalRules.set(true)
+//
+//    android.set(true)
+//    ignoreFailures.set(false)
+//    debug.set(true)
+//    verbose.set(true)
+//    outputToConsole.set(true)
+//    outputColorName.set("RED")
+//
+//    filter {
+//        include("**/**.kt", "**/**.kts")
+//        exclude("**/build/**")
+//    }
+//    disabledRules.add("no-wildcard-imports")
+//    disabledRules.add("no-consecutive-blank-lines")
+//    disabledRules.add("no-blank-line-before-rbrace")
+//    disabledRules.add("indent")
+//    disabledRules.add("no-blank-line-before-rbrace")
+//    disabledRules.add("final-newline")
+//    disabledRules.add("import-ordering")
+//    disabledRules.add("comment-spacing")
+//
+//
+//    reporters {
+//        reporter(reporterType = org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+//        reporter(reporterType = org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+//        reporter(reporterType = org.jlleitschuh.gradle.ktlint.reporter.ReporterType.SARIF)
+//    }
+//}
+//
+//tasks.withType<Detekt>().configureEach {
+//    // Common configuration for all Detekt tasks
+////    config.setFrom(files("path/to/detekt-config.yml"))
+//    include("**/*.kt", "**/*.kts")
+//    exclude("**/build/**")
+//    jvmTarget = JavaVersion.VERSION_17.toString()
+//    reports {
+//        txt.required.set(false)
+//        sarif.required.set(false)
+//        md.required.set(false)
+//        xml.required.set(false)
+//        html.required.set(true)
+//        html.outputLocation.set(file("${project.buildDir}/reports/detekt/detekt.html"))
+//    }
+//}
+//
+//detekt {
+//    parallel = true
+//    allRules = true
+//    autoCorrect = true
+//    buildUponDefaultConfig = true
+//    setSource(file(projectDir))
+//    config.setFrom(file("${rootProject.rootDir}/config/detekt/detekt.yml"))
+//}
+
 
 dependencies {
 
@@ -71,4 +144,25 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+
+
+//    debuging tools
+    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation("com.facebook.stetho:stetho:1.6.0")
+    implementation ("com.facebook.stetho:stetho-okhttp3:1.6.0")
+
+
+    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+
+//    for MemoryLeaks
+    debugImplementation ("com.squareup.leakcanary:leakcanary-android:3.0-alpha-1")
+    androidTestImplementation ("com.squareup.leakcanary:leakcanary-android-instrumentation:3.0-alpha-1")
+
+//    for BenchMark
+
+        implementation ("androidx.profileinstaller:profileinstaller:1.3.1")
+
 }
