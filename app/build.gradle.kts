@@ -135,9 +135,10 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+
+
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
@@ -164,5 +165,26 @@ dependencies {
 //    for BenchMark
 
         implementation ("androidx.profileinstaller:profileinstaller:1.3.1")
+
+
+//    Unit Testing
+
+    /* JUnit*/
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+
+//    Kluent
+    testImplementation ("org.amshove.kluent:kluent:1.65")
+    testImplementation ("org.amshove.kluent:kluent-android:1.65")
+    testImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.5.31")
+
+//    Mokk
+    testImplementation ("io.mockk:mockk:1.12.0")
+
+//    ANdroid Testing
+
+//    Roboelectric
+    testImplementation ("org.robolectric:robolectric:4.11.1")
+    testImplementation ("org.robolectric:annotations:4.11.1")
 
 }

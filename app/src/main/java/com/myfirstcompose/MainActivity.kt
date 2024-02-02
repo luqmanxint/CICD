@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -124,7 +125,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MessageList(messages: List<MessageCard>) {
-    LazyColumn(modifier = Modifier.fillMaxHeight()) {
+    LazyColumn(modifier = Modifier.fillMaxHeight().testTag( "MessageList")) {
         items(messages) { message ->
             MessageCard(msg = message)
             Divider(modifier = Modifier.height(2.dp)) // Add a divider between items if needed
@@ -171,27 +172,27 @@ fun generateSampleMessages(): List<MessageCard> {
         MessageCard("John Doe", "This is the message body 1"),
         MessageCard("Jane Doe", "This is the message body 2"),
         MessageCard("Bob Smith", "This is the message body 3"),
-        MessageCard("John Doe", "This is the message body 1"),
-        MessageCard("Jane Doe", "This is the message body 2"),
-        MessageCard("Bob Smith", "This is the message body 3"),
-        MessageCard("John Doe", "This is the message body 1"),
-        MessageCard("Jane Doe", "This is the message body 2"),
-        MessageCard("Bob Smith", "This is the message body 3"),
-        MessageCard("John Doe", "This is the message body 1"),
-        MessageCard("Jane Doe", "This is the message body 2"),
-        MessageCard("Bob Smith", "This is the message body 3"),
-        MessageCard("John Doe", "This is the message body 1"),
-        MessageCard("Jane Doe", "This is the message body 2"),
-        MessageCard("Bob Smith", "This is the message body 3"),
-        MessageCard("John Doe", "This is the message body 1"),
-        MessageCard("Jane Doe", "This is the message body 2"),
-        MessageCard("Bob Smith", "This is the message body 3"),
-        MessageCard("John Doe", "This is the message body 1"),
-        MessageCard("Jane Doe", "This is the message body 2"),
-        MessageCard("Bob Smith", "This is the message body 3"),
-        MessageCard("John Doe", "This is the message body 1"),
-        MessageCard("Jane Doe", "This is the message body 2"),
-        MessageCard("Bob Smith", "This is the message body 3")
+//        MessageCard("John Doe", "This is the message body 1"),
+//        MessageCard("Jane Doe", "This is the message body 2"),
+//        MessageCard("Bob Smith", "This is the message body 3"),
+//        MessageCard("John Doe", "This is the message body 1"),
+//        MessageCard("Jane Doe", "This is the message body 2"),
+//        MessageCard("Bob Smith", "This is the message body 3"),
+//        MessageCard("John Doe", "This is the message body 1"),
+//        MessageCard("Jane Doe", "This is the message body 2"),
+//        MessageCard("Bob Smith", "This is the message body 3"),
+//        MessageCard("John Doe", "This is the message body 1"),
+//        MessageCard("Jane Doe", "This is the message body 2"),
+//        MessageCard("Bob Smith", "This is the message body 3"),
+//        MessageCard("John Doe", "This is the message body 1"),
+//        MessageCard("Jane Doe", "This is the message body 2"),
+//        MessageCard("Bob Smith", "This is the message body 3"),
+//        MessageCard("John Doe", "This is the message body 1"),
+//        MessageCard("Jane Doe", "This is the message body 2"),
+//        MessageCard("Bob Smith", "This is the message body 3"),
+//        MessageCard("John Doe", "This is the message body 1"),
+//        MessageCard("Jane Doe", "This is the message body 2"),
+//        MessageCard("Bob Smith", "This is the message body 3")
     )
 }
 
